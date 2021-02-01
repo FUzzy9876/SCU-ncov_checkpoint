@@ -44,9 +44,9 @@ python ncov.py
 
 ## 在服务器上运行：
 #### 环境
-python3.8+ <br>
-chrome & chromedriver <br>
-selenium库 <br>
+python3.8+ [教程](https://www.cnblogs.com/somenothing/p/14355971.html) <br>
+chrome & chromedriver [教程](https://www.cnblogs.com/somenothing/p/14356004.html) <br>
+selenium库 [教程](https://www.cnblogs.com/somenothing/p/14356017.html) <br>
 #### 运行
 下载for Linux目录中的ncov.py
 运行
