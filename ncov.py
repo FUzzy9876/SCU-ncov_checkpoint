@@ -74,6 +74,9 @@ class Clock:
             )
             ok_element.click()
             print(self.username, 'success!')
+            WebDriverWait(browser, 3).until(
+                EC.presence_of_element_located((By.XPATH, '/html/body/div[5]/div/div[1]'))  # 成功对话框标题
+            )
             title_success = browser.find_element_by_xpath('/html/body/div[5]/div/div[1]').get_attribute("innerHTML")
             print('From website:', title_success)
         except:
