@@ -3,6 +3,7 @@ import sys
 import time
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -21,9 +22,11 @@ class Check:
 
     def main(self):
         print('\npreparing...')
-        chrome_options = webdriver.ChromeOptions()
-        # chrome_options.add_argument('--headless')
-        browser = webdriver.Chrome(self.path, options=chrome_options)
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        browser = webdriver.Chrome(executable_path="/usr/bin/chromedriver", chrome_options=chrome_options)
         print('starting...')
         statue = 0
         while True:
@@ -81,6 +84,15 @@ class Check:
         except Exception as error:
             print('get location wrong...\n', error)
         time.sleep(1)  # 等待位置信息
+        '''
+        以下截取提交前的页面，后续开发使用
+        width = browser.execute_script("return document.documentElement.scrollWidth")
+        height = browser.execute_script("return document.documentElement.scrollHeight")
+        print(width,height)
+        browser.set_window_size(width, height)
+        time.sleep(1)
+        browser.save_screenshot('pic.png')
+        '''
         browser.find_element_by_xpath('/html/body/div[1]/div/div/section/div[5]/div/a').click()  # 提交信息
         try:
             ok_element = WebDriverWait(browser, 3).until(

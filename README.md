@@ -4,7 +4,12 @@ SCU-ncov_checkpoint
 ----
 
 ## 更新日志：
-### 最近更新：2021年9月13日
+### 最近更新：2021年9月23日
+* 开放少量测试名额，详情请联系作者
+* 新增main-mysql分支，支持链接mysql数据库
+* 计划：实现cookie登录、等待时间优化、验证码识别优化
+
+### 2021年9月13日
 * 大量减少无用代码/文件
 * 已经针对需要验证码功能做出更新
 * 计划：实现cookie登录、等待时间优化、验证码识别优化
@@ -29,7 +34,7 @@ SCU-ncov_checkpoint
 # 使用方法：
 将本项目克隆到本地 <br>
 在run.py内填入您的学号和密码 <br>
-在scripts/verification内自行填入您百度开发者账号的API_KEY和SECRET_KEY <br>
+在scripts/verification.py内自行填入您百度开发者账号的API_KEY和SECRET_KEY <br>
 ```
 python run.py
 ```
@@ -37,7 +42,7 @@ python run.py
 
 # 开发 & 更新：
 author: somenothing <br>
-e-mail: w98987@126.com <br>
+e-mail: admin@somenothing.top <br>
 使用python - selenium <br>
 使用百度orc <br>
 #### 请留下star，谢谢！
