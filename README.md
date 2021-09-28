@@ -5,7 +5,7 @@ SCU-ncov_checkpoint
 
 ## 更新日志：
 ### 最近更新：2021年9月23日
-* 开放少量测试名额，详情请联系作者  [telegram交流群](t.me/scuncovcheck)
+* 开放少量测试名额，详情请联系作者  [telegram交流群](http://t.me/scuncovcheck)
 * 新增main-mysql分支，支持链接mysql数据库
 * 计划：实现cookie登录、等待时间优化、验证码识别优化
 
