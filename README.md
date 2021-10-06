@@ -44,5 +44,5 @@ python run.py
 author: somenothing <br>
 e-mail: admin@somenothing.top <br>
 使用python - selenium <br>
-使用百度orc <br>
+使用百度ocr <br>
 #### 请留下star，谢谢！
