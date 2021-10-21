@@ -3,7 +3,11 @@ SCU-ncov_checkpoint
 四川大学微服务健康每日报 自动打卡
 ----
 
+[项目文档](http://docs.somenothing.top/web/#/6/24)
+
 ## 更新日志：
+### 2021年10月21日已更新main-mysql分支
+
 ### 最近更新：2021年9月23日
 * 开放少量测试名额，详情请联系作者  [telegram交流群](http://t.me/scuncovcheck)
 * 新增main-mysql分支，支持链接mysql数据库
