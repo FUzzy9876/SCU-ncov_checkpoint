@@ -1,44 +1,38 @@
-# -*- coding: UTF-8 -*-
+import time
 
-"""
-author: somenothing
-e-mail: admin@somenothing.top
-"""
-
-import pymysql
-
-from scripts.main import Check
+from scripts import config
+from scripts import mysql
+from scripts.main import begin
+from scripts import message
 
 
-latitude = 30.564365  # 纬度
-longitude = 104.007195  # 经度
+def ncov():
+    database = config.read_config('Database')
+    match database:
+        case -1:
+            return 0.1
+        case 1:
+            return 0.2
+        case _:
+            data = mysql.connect_db(database)
+    match data:
+        case -1:
+            return 1.1
+        case 1:
+            return 1.2
+        case _:
+            pass
+    keys = tuple(config.read_config('BaiduOCR').values())
+    for value in data:
+        result = begin(value, keys)
+        if result == 0:
+            text = '%s今日健康打卡已完成！' % value['username']
+        else:
+            text = '注意：今日健康打卡未成功，程序会在12点前再次运行确保完成打卡，请实时关注！\n错误信息：\n' + str(result)
+        message.send_message(text, value['wechat'])
 
-path = '.\chromedriver\chromedriver.exe'
 
-
-db = pymysql.connect(host="localhost",user="",password="",database="")
-cursor = db.cursor()
-
-sql = "SELECT * FROM user"
-
-try:
-    cursor.execute(sql)
-    results = cursor.fetchall()
-except:
-    print ("Error: unable to fetch data")
-print('success to fetch data')
-for row in results:
-    username = row[2]  # 学号对应
-    password = row[3]  # 密码对应位置
-    statue = row[4]  # 等待后续更新
-    x = Check(user=username, passwd=password, lat=latitude, long=longitude, path=path)
-    x.main()
-
-
-db.close()
-
-'''
-开发备用
-username = ''  # 用户名（学号）
-password = ''  # 密码
-'''
+if __name__ == '__main__':
+    r = ncov()
+    print(r)
+    print('程序正常退出')

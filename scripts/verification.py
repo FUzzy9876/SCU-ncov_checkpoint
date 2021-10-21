@@ -18,10 +18,6 @@ IS_PY3 = True
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-API_KEY = ''
-
-SECRET_KEY = ''
-
 OCR_URL = "https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic"
 
 """  TOKEN start """
@@ -32,7 +28,7 @@ TOKEN_URL = 'https://aip.baidubce.com/oauth/2.0/token'
 """
 
 
-def fetch_token():
+def fetch_token(API_KEY, SECRET_KEY):
     params = {'grant_type': 'client_credentials',
               'client_id': API_KEY,
               'client_secret': SECRET_KEY}
@@ -95,8 +91,8 @@ def request(url, data):
     except  URLError as err:
         print(err)
 
-def main(url):
-    token = fetch_token()
+def main(url, API_KEY, SECRET_KEY):
+    token = fetch_token(API_KEY, SECRET_KEY)
 
     # 拼接通用文字识别高精度url
     image_url = OCR_URL + "?access_token=" + token
@@ -118,7 +114,3 @@ def main(url):
     # print(text)
 
     return text
-
-
-if __name__ == '__main__':
-    main('')
