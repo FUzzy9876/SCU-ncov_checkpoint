@@ -4,7 +4,10 @@ SCU-ncov_checkpoint
 ----
 
 ## 更新日志：
-### 最近更新：2021年10月21日
+### 最近更新：2021年11月1日
+* 修复了某些情况下报错 (DevToolsActivePort file doesn't exist)
+
+### 2021年10月21日
 * main-mysql分支已实现打卡后微信实时通知打卡情况。
 * main-mysql分支请在config.ini中填写配置。
 
@@ -36,12 +39,7 @@ SCU-ncov_checkpoint
   * 解决部分设备或浏览器无定位功能的问题
   
 # 使用方法：
-将本项目克隆到本地 <br>
-在run.py内填入您的学号和密码 <br>
-在scripts/verification.py内自行填入您百度开发者账号的API_KEY和SECRET_KEY <br>
-```
-python run.py
-```
+[项目文档](http://docs.somenothing.top/web/#/6/24)
 
 
 # 开发 & 更新：
