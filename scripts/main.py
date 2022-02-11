@@ -46,7 +46,7 @@ class Check:
             username_element, password_element, verification_element = input_elements
             username_element.send_keys(self.username)  # 填用户名
             password_element.send_keys(self.password)  # 填密码
-            time.sleep(0.5)
+            time.sleep(1)
             browser.find_element_by_class_name('van-field__button').screenshot('captcha.png')
             verification = ver.main('captcha.png', api, secret)
             print('[%s] (%s) verification code: ' % eval(head) + verification, end=' --- ')
