@@ -7,7 +7,16 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 
-from . import verification as ver
+import scripts.verification as ver
+
+
+def screenshot(browser):
+    width = browser.execute_script("return document.documentElement.scrollWidth")
+    height = browser.execute_script("return document.documentElement.scrollHeight")
+    print(width,height)
+    browser.set_window_size(width, height)
+    time.sleep(0.5)
+    browser.save_screenshot('pic.png')
 
 
 class Check:
@@ -46,7 +55,7 @@ class Check:
             username_element, password_element, verification_element = input_elements
             username_element.send_keys(self.username)  # 填用户名
             password_element.send_keys(self.password)  # 填密码
-            time.sleep(1)
+            time.sleep(0.5)
             browser.find_element_by_class_name('van-field__button').screenshot('captcha.png')
             verification = ver.main('captcha.png', api, secret)
             print('[%s] (%s) verification code: ' % eval(head) + verification, end=' --- ')
@@ -63,6 +72,14 @@ class Check:
                 browser.quit()
                 return 1  # 超时返回值
             time.sleep(3)
+        
+        # 2022-05-15修复，解决弹窗问题
+        WebDriverWait(browser, 5).until(
+            ec.presence_of_element_located((By.CLASS_NAME, 'wapat-btn.wapat-btn-ok'))
+        )
+        time.sleep(1)
+        browser.find_element(By.CSS_SELECTOR, '.wapat-btn.wapat-btn-ok').click()  # 点击对话框
+        
 
         browser.execute_cdp_cmd(
             "Browser.grantPermissions",  # 授权地理位置信息
@@ -88,19 +105,13 @@ class Check:
             print('[%s] (%s) [!ERROR!] Get location wrong: \n' % eval(head), error)
             return 2  # 位置错误返回
         time.sleep(1)  # 等待位置信息
-        '''
-        以下截取提交前的页面，后续开发使用
-        width = browser.execute_script("return document.documentElement.scrollWidth")
-        height = browser.execute_script("return document.documentElement.scrollHeight")
-        print(width,height)
-        browser.set_window_size(width, height)
-        time.sleep(1)
-        browser.save_screenshot('pic.png')
-        '''
-        browser.find_element_by_xpath('/html/body/div[1]/div/div/section/div[5]/div/a').click()  # 提交信息
+        # screenshot(browser)
+        browser.find_element(By.CSS_SELECTOR, 'div.footers > a').click()  # 提交信息
+        time.sleep(0.5)
+        # screenshot(browser)
         try:
             ok_element = WebDriverWait(browser, 3).until(
-                ec.element_to_be_clickable((By.XPATH, '/html/body/div[4]/div/div[2]/div[2]'))  # 提交按钮
+                ec.element_to_be_clickable((By.CLASS_NAME, 'wapcf-btn.wapcf-btn-ok'))  # 提交按钮
             )
             ok_element.click()
             WebDriverWait(browser, 3).until(
@@ -121,3 +132,4 @@ class Check:
 def begin(value, keys):
     x = Check(user=value['username'], passwd=value['password'])
     r = x.main(keys[0], keys[1])
+    return r
