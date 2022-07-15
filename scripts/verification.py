@@ -4,7 +4,6 @@ import sys
 import json
 import base64
 
-
 from urllib.request import urlopen
 from urllib.request import Request
 from urllib.error import URLError
@@ -46,7 +45,7 @@ def fetch_token(API_KEY, SECRET_KEY):
 
     result = json.loads(result_str)
 
-    if ('access_token' in result.keys() and 'scope' in result.keys()):
+    if 'access_token' in result.keys() and 'scope' in result.keys():
         if not 'brain_all_scope' in result['scope'].split(' '):
             print('please ensure has check the  ability')
             exit()
@@ -90,6 +89,7 @@ def request(url, data):
         return result_str
     except  URLError as err:
         print(err)
+
 
 def main(url, API_KEY, SECRET_KEY):
     token = fetch_token(API_KEY, SECRET_KEY)
