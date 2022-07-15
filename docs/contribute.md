@@ -4,7 +4,7 @@
 
 ### 1. 开始
 
-请去 Issues 下寻找您感兴趣的开发内容，或欢迎任何新 feature ！
+请去 [Issues](https://github.com/somenothing/SCU-ncov_checkpoint/issues) 下寻找您感兴趣的开发内容，或欢迎任何新 feature ！
 
 fork 本项目，编写代码，然后 pull requests！
 

@@ -43,7 +43,7 @@ SCU-ncov_checkpoint
   * 解决部分设备或浏览器无定位功能的问题
   
 # 使用方法：
-[项目文档](http://docs.somenothing.top/web/#/6/24)
+[项目文档](https://github.com/somenothing/SCU-ncov_checkpoint/tree/main-mysql/docs)
 
 
 # 开发 & 更新：
