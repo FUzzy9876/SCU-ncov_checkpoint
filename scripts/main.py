@@ -72,40 +72,6 @@ class Check:
                 browser.quit()
                 return 1  # 超时返回值
             time.sleep(3)
-        
-        # 2022-05-15修复，解决弹窗问题
-        WebDriverWait(browser, 5).until(
-            ec.presence_of_element_located((By.CLASS_NAME, 'wapat-btn.wapat-btn-ok'))
-        )
-        time.sleep(1)
-        browser.find_element(By.CSS_SELECTOR, '.wapat-btn.wapat-btn-ok').click()  # 点击对话框
-        
-
-        browser.execute_cdp_cmd(
-            "Browser.grantPermissions",  # 授权地理位置信息
-            {
-                "origin": "https://wfw.scu.edu.cn/",
-                "permissions": ["geolocation"]
-            },
-        )
-        browser.execute_cdp_cmd(
-            "Emulation.setGeolocationOverride",  # 虚拟位置
-            {
-                "latitude": self.lat,
-                "longitude": self.long,
-                "accuracy": 50,
-            },
-        )
-        try:  # 提交位置信息
-            area_element = WebDriverWait(browser, 10).until(
-                ec.element_to_be_clickable((By.NAME, 'area'))
-            )
-            area_element.click()
-        except Exception as error:
-            print('[%s] (%s) [!ERROR!] Get location wrong: \n' % eval(head), error)
-            return 2  # 位置错误返回
-        time.sleep(1)  # 等待位置信息
-        # screenshot(browser)
         browser.find_element(By.CSS_SELECTOR, 'div.footers > a').click()  # 提交信息
         time.sleep(0.5)
         # screenshot(browser)
